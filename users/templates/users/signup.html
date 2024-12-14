@@ -1,15 +1,24 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastro</title>
-</head>
-<body>
-    <h1>Cadastro de Usuário</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Cadastrar</button>
-    </form>
-</body>
-</html>
+{% extends 'login.html' %}
+
+{% block content %}
+<h1>Cadastro de Usuário</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="signup-container">
+        <label for="id_username">Email:</label>
+        <input placeholder="exemplo@exemplo.com" type="text" name="username" id="id_username" required>
+    </div>
+    <div class="signup-container">
+        <label for="id_password1">Senha:</label>
+        <input placeholder="******" type="password" name="password1" id="id_password1" required>
+    </div>
+    <div class="signup-container">
+        <label for="id_password2">Confirme a Senha:</label>
+        <input placeholder="******" type="password" name="password2" id="id_password2" required>
+    </div>
+    <button class="form-submit" type="submit">Cadastrar</button>
+    <p>
+        Já possui uma conta? <a href="{% url 'login' %}">Faça login</a>
+    </p>
+</form>
+{% endblock content %}
