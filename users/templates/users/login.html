@@ -1,22 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
-    <form method="post">
-        {% csrf_token %}
-        <p>
-            <label for="id_username">Email:</label>
-            <input type="text" name="username" id="id_username" required>
-        </p>
-        <p>
-            <label for="id_password">Senha:</label>
-            <input type="password" name="password" id="id_password" required>
-        </p>
-        <button type="submit">Entrar</button>
-    </form>
-</body>
-</html>
+{% extends 'login.html' %}
+
+{% block content %}
+<h1>Login</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="login-container" >
+        <label for="id_username">Email:</label>
+        <input placeholder="exemplo@exemplo.com" type="text" name="username" id="id_username" required>
+    </div>
+    <div class="login-container" >
+        <label for="id_password">Senha:</label>
+        <input placeholder="******" type="password" name="password" id="id_password" required>
+    </div>
+    <button class="form-submti" type="submit">Entrar</button>
+    <p>
+        Ainda não tem conta? <a href="{% url 'signup' %}">Cadastre-se</a>
+    </p>
+</form>
+{% endblock content %}

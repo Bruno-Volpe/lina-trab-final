@@ -58,7 +58,7 @@ ROOT_URLCONF = 'boddys_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'boddys_project' / 'templates'],  # adicione este path
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
