@@ -1,24 +1,67 @@
 {% extends 'login.html' %}
 
+{% block title %}Cadastro{% endblock title %}
+
 {% block content %}
-<h1>Cadastro de Usuário</h1>
-<form method="post">
-    {% csrf_token %}
-    <div class="signup-container">
-        <label for="id_username">Email:</label>
-        <input placeholder="exemplo@exemplo.com" type="text" name="username" id="id_username" required>
-    </div>
-    <div class="signup-container">
-        <label for="id_password1">Senha:</label>
-        <input placeholder="******" type="password" name="password1" id="id_password1" required>
-    </div>
-    <div class="signup-container">
-        <label for="id_password2">Confirme a Senha:</label>
-        <input placeholder="******" type="password" name="password2" id="id_password2" required>
-    </div>
-    <button class="form-submit" type="submit">Cadastrar</button>
-    <p>
-        Já possui uma conta? <a href="{% url 'login' %}">Faça login</a>
-    </p>
-</form>
+    <h1>Cadastro de Usuário</h1>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        
+        {% if form.errors %}
+            <div class="error">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        <!-- Campo de Email -->
+        <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            {{ form.email }}
+        </div>
+        
+        <!-- Campo de Nome Completo -->
+        <div class="form-group">
+            <label for="{{ form.nome.id_for_label }}">{{ form.nome.label }}</label>
+            {{ form.nome }}
+        </div>
+        
+        <!-- Campo de Data de Nascimento -->
+        <div class="form-group">
+            <label for="{{ form.dataNascimento.id_for_label }}">{{ form.dataNascimento.label }}</label>
+            {{ form.dataNascimento }}
+        </div>
+        
+        <!-- Campo de URL da Foto de Perfil -->
+        <div class="form-group">
+            <label for="{{ form.urlFotoPerfil.id_for_label }}">{{ form.urlFotoPerfil.label }}</label>
+            {{ form.urlFotoPerfil }}
+        </div>
+        
+        <!-- Campo de Senha -->
+        <div class="form-group">
+            <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+            {{ form.password1 }}
+        </div>
+        
+        <!-- Campo de Confirmação de Senha -->
+        <div class="form-group">
+            <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+            {{ form.password2 }}
+        </div>
+        
+        <button class="form-submit" type="submit">Cadastrar</button>
+        <p>
+            Já possui uma conta? <a href="{% url 'login' %}">Faça login</a>
+        </p>
+    </form>
 {% endblock content %}
+
