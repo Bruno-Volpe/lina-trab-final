@@ -1,0 +1,13 @@
+{% extends 'login.html' %}
+
+{% block title %}Meus Grupos{% endblock title %}
+
+{% block content %}
+<h1>Meus Grupos</h1>
+<ul>
+    {% for grupo in grupos %}
+        <li>{{ grupo.nome }} - Código: {{ grupo.codigoAcesso }}</li>
+    {% endfor %}
+</ul>
+<a class="button"  href="{% url 'criar_grupo' %}">Criar novo grupo</a>
+{% endblock content %}

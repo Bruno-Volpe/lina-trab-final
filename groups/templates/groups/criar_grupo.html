@@ -1,0 +1,12 @@
+{% extends 'login.html' %}
+
+{% block title %}Criar Grupo{% endblock title %}
+
+{% block content %}
+<h1>Criar Novo Grupo</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Criar</button>
+</form>
+{% endblock content %}
