@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'groups',
     'workouts',
     'social',
+    'core'
 ]
 
 MIDDLEWARE = [

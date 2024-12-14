@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Bem-vindo ao Boddys</h1>
+    {% if user.is_authenticated %}
+        <p>Olá, {{ user.nome }}! Você está autenticado.</p>
+        <p><form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit">Sair</button>
+      </form>
+      </p>
+    {% else %}
+        <p>Você não está logado. <a href="{% url 'signup' %}">Cadastrar</a> ou <a href="{% url 'login' %}">Login</a></p>
+    {% endif %}
+</body>
+</html>
