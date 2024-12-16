@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Posts do Grupo{% endblock title %}
+
+{% block content %}
+<h1>Posts do Grupo: {{ grupo.nome }}</h1>
+
+<a href="{% url 'criar_post' %}">Criar Post</a>
+
+{% if posts %}
+    <ul>
+    {% for post in posts %}
+        <li>
+            <strong>{{ post.titulo }}</strong> - por {{ post.autor.nome }} em {{ post.data|date:"d/m/Y H:i" }}
+            {% if post.urlDaImagem %}
+                <br><img src="{{ post.urlDaImagem }}" alt="{{ post.titulo }}" style="max-width:200px;">
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhum post ainda.</p>
+{% endif %}
+
+<p><a class="button" href="{% url 'listar_grupos' %}">Voltar para Meus Grupos</a></p>
+{% endblock content %}

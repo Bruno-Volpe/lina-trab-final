@@ -6,9 +6,14 @@
 <h1>Meus Grupos</h1>
 <ul>
     {% for grupo in grupos %}
-        <li>{{ grupo.nome }} - Código: {{ grupo.codigoAcesso }}</li>
+      <li>
+        <a href="{% url 'listar_posts_grupo' grupo.id %}">
+          {{ grupo.nome }} - Código: {{ grupo.codigoAcesso }}
+        </a>
+      </li>
     {% endfor %}
 </ul>
-<a class="button"  href="{% url 'criar_grupo' %}">Criar novo grupo</a>
-<a class="button"  href="{% url 'join_grupo' %}">Entrar em novo grupo</a>
+
+<a class="button" href="{% url 'criar_grupo' %}">Criar novo grupo</a>
+<a class="button" href="{% url 'join_grupo' %}">Entrar em um grupo</a>
 {% endblock content %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Criar Post{% endblock title %}
+
+{% block content %}
+<h1>Criar Novo Post</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Postar</button>
+</form>
+<p><a href="{% url 'home' %}">Voltar</a></p>
+{% endblock content %}
