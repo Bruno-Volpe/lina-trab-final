@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Meus Treinos{% endblock title %}
+
+{% block content %}
+<h1>Meus Treinos</h1>
+<ul>
+    {% for treino in treinos %}
+        <li>{{ treino.nome }} - {{ treino.dia }}</li>
+    {% endfor %}
+</ul>
+<a class="button" href="{% url 'criar_treino' %}">Criar novo treino</a>
+{% endblock content %}
