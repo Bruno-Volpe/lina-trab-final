@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import GrupoForm
 from .models import Grupo
 from django.contrib.auth import get_user_model
+import random
 
 User = get_user_model()
 
@@ -10,8 +11,12 @@ User = get_user_model()
 def criar_grupo_view(request):
     if request.method == 'POST':
         form = GrupoForm(request.POST)
-        if form.is_valid():
+        if form.is_valid():    
             grupo = form.save(commit=False)
+            grupo.codigoAcesso = random.randint(1000, 9999)
+            # verifiy if the code is unique
+            while Grupo.objects.filter(codigoAcesso=grupo.codigoAcesso).exists():
+                grupo.codigoAcesso = random.randint(1000, 9999)
             grupo.emailAdmin = request.user.email
             grupo.save()
             # Adiciona o criador como membro do grupo
