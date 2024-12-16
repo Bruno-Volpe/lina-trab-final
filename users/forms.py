@@ -55,6 +55,26 @@ class SignUpForm(UserCreationForm):
             'invalid': 'Digite uma URL válida.'
         }
     )
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'placeholder': '******',
+            'class': 'form-control'
+        }),
+        label='Senha',
+        error_messages={
+            'required': 'Por favor, insira sua senha.'
+        }
+    )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'placeholder': '******',
+            'class': 'form-control'
+        }),
+        label='Confirme sua Senha',
+        error_messages={
+            'required': 'Por favor, confirme sua senha.'
+        }
+    )
 
     class Meta:
         model = User
