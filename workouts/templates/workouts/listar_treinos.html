@@ -6,7 +6,9 @@
 <h1>Meus Treinos</h1>
 <ul>
     {% for treino in treinos %}
-        <li>{{ treino.nome }} - {{ treino.dia }}</li>
+      <li>
+        <a href="{% url 'detalhar_treino' treino.id %}">{{ treino.nome }} - {{ treino.dia }}</a>
+      </li>
     {% endfor %}
 </ul>
 <a class="button" href="{% url 'criar_treino' %}">Criar novo treino</a>

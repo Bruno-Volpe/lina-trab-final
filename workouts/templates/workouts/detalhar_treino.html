@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhes do Treino{% endblock title %}
+
+{% block content %}
+<h1>{{ treino.nome }} ({{ treino.dia }})</h1>
+<h2>Séries</h2>
+{% if series %}
+    <ul>
+    {% for serie in series %}
+        <li>Ordem: {{ serie.ordemDoTreino }} - Exercício: {{ serie.exercicio.nome }} - Repetições: {{ serie.numeroRepeticao }} - Carga: {{ serie.carga }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhuma série cadastrada ainda.</p>
+{% endif %}
+
+<p><a class="button" href="{% url 'adicionar_serie' treino.id %}">Adicionar Série</a></p>
+<p><a class="button" href="{% url 'listar_treinos' %}">Voltar aos meus treinos</a></p>
+{% endblock content %}

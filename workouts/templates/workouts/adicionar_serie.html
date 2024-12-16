@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Adicionar Série{% endblock title %}
+
+{% block content %}
+<h1>Adicionar Série ao Treino: {{ treino.nome }} ({{ treino.dia }})</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Adicionar</button>
+</form>
+<p><a href="{% url 'detalhar_treino' treino.id %}">Voltar ao treino</a></p>
+{% endblock content %}
