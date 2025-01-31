@@ -1,7 +1,3 @@
-Abaixo está um exemplo de README em português. Ajuste conforme necessário para refletir com precisão o estado atual do seu projeto e as instruções específicas do seu ambiente ou requisitos.
-
----
-
 # Boddys - Plataforma Social de Treinos
 
 ## Visão Geral
@@ -119,6 +115,64 @@ boddys_project/
 - **Grupos:** Crie um grupo na página de "Meus Grupos" ou entre em um grupo já existente por meio do código de acesso.
 - **Treinos:** Na página de treinos, crie novos treinos, edite-os e adicione séries e exercícios.
 - **Posts:** Na área social, crie posts para compartilhar conquistas com os membros do seu grupo.
+
+## Explicação dos Casos de Uso
+
+### 1. Registrar Treino
+
+- **Descrição**: Esse caso de uso permite que o usuário crie e registre um novo treino, associando-o à sua conta.
+- **Responsável**: Integrante 1  
+- **Arquivo**: `workouts/views.py`
+
+```python
+@login_required
+def criar_treino_view(request):
+    if request.method == 'POST':
+        form = TreinoForm(request.POST)
+        if form.is_valid():
+            treino = form.save(commit=False)
+            treino.usuario = request.user
+            treino.save()
+            return redirect('listar_treinos')
+    else:
+        form = TreinoForm()
+    return render(request, 'workouts/criar_treino.html', {'form': form})
+```
+
+**Como funciona**:
+1. Verifica se há um envio de formulário via `POST`.
+2. Se o formulário (`TreinoForm`) for válido, cria um objeto `treino` associado ao usuário logado (`request.user`) e salva no banco de dados.
+3. Em caso de sucesso, redireciona o usuário para a página de listagem de treinos.
+4. Se o método não for `POST`, exibe o formulário vazio para preenchimento.
+
+### 2. Cadastrar-se no Sistema
+
+- **Descrição**: Este caso de uso possibilita o cadastro de novos usuários no sistema, realizando login automático após a conclusão do processo.
+- **Responsável**: Integrante 2  
+- **Arquivo**: `users/views.py`
+
+```python
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Faz login automático após signup
+            messages.success(request, 'Cadastro realizado com sucesso!')
+            return redirect('home')
+        else:
+            messages.error(request, 'Por favor, corrija os erros abaixo.')
+    else:
+        form = SignUpForm()
+    return render(request, 'users/signup.html', {'form': form})
+```
+
+**Como funciona**:
+1. Se o método for `POST`, lê os dados do formulário (`SignUpForm`).
+2. Se o formulário estiver válido, o usuário é criado e o login é feito automaticamente.
+3. Em caso de sucesso, é exibida uma mensagem e o usuário é redirecionado para a página inicial.
+4. Se houver erros, eles são mostrados para o usuário.
+5. Se o método não for `POST`, carrega o formulário vazio para que o usuário possa se cadastrar.
 
 ## Dados de Teste e Exercícios Padrão
 
